@@ -34,6 +34,16 @@ void sendLetter(char letter){
 	clearEN();
 }
 
+//Only single digit numbers are handled. Breaking digits should be taken care
+void sendNumber(int i){
+	delay(5);
+	EN = 1;
+	RS = 1;
+	RW = 0;
+	DATA = i+30;	//Hex value of ASCII. so add 30h
+	clearEN();
+}
+
 void initializeDisplay(){
 	sendCmd(0x38); //Mode set 					0011 1000
 	sendCmd(0x0E); //Display ON					0000 1110
@@ -44,6 +54,7 @@ void initializeDisplay(){
 
 void main(){
 	EN = 0;
+	j = 7;			//For variables demo
 	initializeDisplay();
 	sendLetter('W');
 	sendLetter('e');
@@ -61,6 +72,8 @@ void main(){
 	sendLetter('e');
 	sendLetter('n');
 	sendLetter('!');
+	
+	sendNumber(j);		//Just for variables demo
 	
 	while(1){}
 }
